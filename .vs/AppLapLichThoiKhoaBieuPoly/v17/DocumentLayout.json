@@ -1,0 +1,79 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\CODE\\CODE_C#\\CODE APP\\AppLapLichThoiKhoaBieuPoly\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{77438E0D-F65A-49A2-A81F-01CBC71138F6}|AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly.csproj|e:\\code\\code_c#\\code app\\applaplichthoikhoabieupoly\\applaplichthoikhoabieupoly\\geneticalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77438E0D-F65A-49A2-A81F-01CBC71138F6}|AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly.csproj|solutionrelative:applaplichthoikhoabieupoly\\geneticalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77438E0D-F65A-49A2-A81F-01CBC71138F6}|AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly.csproj|E:\\CODE\\CODE_C#\\CODE APP\\AppLapLichThoiKhoaBieuPoly\\applaplichthoikhoabieupoly\\uc\\uc_generality.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77438E0D-F65A-49A2-A81F-01CBC71138F6}|AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly.csproj|solutionrelative:applaplichthoikhoabieupoly\\uc\\uc_generality.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77438E0D-F65A-49A2-A81F-01CBC71138F6}|AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly.csproj|e:\\code\\code_c#\\code app\\applaplichthoikhoabieupoly\\applaplichthoikhoabieupoly\\uc\\uc_schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77438E0D-F65A-49A2-A81F-01CBC71138F6}|AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly.csproj|solutionrelative:applaplichthoikhoabieupoly\\uc\\uc_schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UC_Schedule.cs",
+              "DocumentMoniker": "E:\\CODE\\CODE_C#\\CODE APP\\AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly\\UC\\UC_Schedule.cs",
+              "RelativeDocumentMoniker": "AppLapLichThoiKhoaBieuPoly\\UC\\UC_Schedule.cs",
+              "ToolTip": "E:\\CODE\\CODE_C#\\CODE APP\\AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly\\UC\\UC_Schedule.cs",
+              "RelativeToolTip": "AppLapLichThoiKhoaBieuPoly\\UC\\UC_Schedule.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAgwCkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T08:29:36.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UC_Generality.cs",
+              "DocumentMoniker": "E:\\CODE\\CODE_C#\\CODE APP\\AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly\\UC\\UC_Generality.cs",
+              "RelativeDocumentMoniker": "AppLapLichThoiKhoaBieuPoly\\UC\\UC_Generality.cs",
+              "ToolTip": "E:\\CODE\\CODE_C#\\CODE APP\\AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly\\UC\\UC_Generality.cs",
+              "RelativeToolTip": "AppLapLichThoiKhoaBieuPoly\\UC\\UC_Generality.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAswA8AAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T16:43:30.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GeneticAlgorithm.cs",
+              "DocumentMoniker": "E:\\CODE\\CODE_C#\\CODE APP\\AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly\\GeneticAlgorithm.cs",
+              "RelativeDocumentMoniker": "AppLapLichThoiKhoaBieuPoly\\GeneticAlgorithm.cs",
+              "ToolTip": "E:\\CODE\\CODE_C#\\CODE APP\\AppLapLichThoiKhoaBieuPoly\\AppLapLichThoiKhoaBieuPoly\\GeneticAlgorithm.cs",
+              "RelativeToolTip": "AppLapLichThoiKhoaBieuPoly\\GeneticAlgorithm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQFAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T16:06:30.487Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
