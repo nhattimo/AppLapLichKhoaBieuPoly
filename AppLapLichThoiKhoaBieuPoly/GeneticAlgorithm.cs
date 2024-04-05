@@ -128,44 +128,29 @@ namespace AppLapLichThoiKhoaBieuPoly
                 TimetableChromosome chromosome = new TimetableChromosome(weekdays, shift);
                 chromosome.Fitness = _Fitness;
 
+                Dictionary<string, HashSet<int>> professorAssignments = new Dictionary<string, HashSet<int>>();
+                HashSet<int> selectedClassIDs = new HashSet<int>(); // Đảm bảo tính duy nhất cho mỗi chromosome
                 for (int day = 0; day < 2; day++) // Lặp qua 2 ngày đầu tuần ngày trong tuần
                 {
-                    Dictionary<string, HashSet<int>> professorAssignments = new Dictionary<string, HashSet<int>>();
-                    HashSet<int> selectedClassIDs = new HashSet<int>(); // Đảm bảo tính duy nhất cho mỗi chromosome
-                    Console.WriteLine("day (Thứ) : " + day );
-
                     for (int currentShift = 0; currentShift < shift; currentShift++) // Lặp qua mỗi ca học
                     {
-                        Console.WriteLine("currentShift (Ca học) : " + currentShift);
+                        // khởi tạo key
                         string key = $"Day{day}Shift{currentShift}";
+                        // số lượng lớp trong 1 ca học
                         int classesInCurrentShift = numberOfClassesPerShift + (currentShift < excessClass ? 1 : 0);
-                        Console.WriteLine("Số lượng lớp học: " + classesInCurrentShift);
                         for (int classIndex = 0; classIndex < classesInCurrentShift; classIndex++)
                         {
-                            Console.WriteLine("classesInCurrentShift " + classIndex);
                             int classID = GetUniqueRandomClassID(selectedClassIDs, _ListClassIDs, _Random);
                             int courseID = GetCourseIDForClass(classID, day); // Lấy CourseID đầu tiên cho ClassID
                             int professorID = GetProfessorForClassAndCourse(classID, courseID); // Sử dụng CourseID này để lấy ProfessorID
                             int roomIndex = _Random.Next(_ListRoomIDs.Count);
                             int roomID = _ListRoomIDs[roomIndex];
 
-                            if (classID == 0)
+                            if (professorAssignments.ContainsKey(key))
                             {
-                                Console.WriteLine("Lớp rõng nên bỏ qua ");
-                                break;
-                            }
-                            // Kiểm tra xem giáo viên này đã được phân công cho ca học này chưa
-                            if (!professorAssignments.ContainsKey(key))
-                            {
-                                // kiểm tra key nếu chưa có thì thêm mới 
-                                professorAssignments[key] = new HashSet<int>();
-                            }
-
-                            if (professorAssignments[key].Contains(professorID))
-                            {
-                                // Giáo viên này đã được phân công cho ca học này, bỏ qua việc thêm
-                                Console.WriteLine($"Professor {professorID} đã được phân công cho ca {currentShift} ngày {day}, bỏ qua.");
-                                // Tìm một giáo viên thay thế
+                                // Nếu key tồn tại, có nghĩa là giáo viên này đã được phân công cho ca học này trong ngày này
+                                Console.WriteLine($"Giáo viên {professorID} đã được phân công cho ca {currentShift} ngày {day}, tìm giáo viên thay thế.");
+                                // Tìm giáo viên thay thế hoặc xử lý tương tự
                                 int alternateProfessorID = FindAlternateProfessor(classID, courseID, key, professorAssignments);
                                 if (alternateProfessorID == 0)
                                 {
@@ -177,16 +162,18 @@ namespace AppLapLichThoiKhoaBieuPoly
                                     Console.WriteLine($"Tìm thấy giáo viên thay thế cho môn {courseID} lớp {classID} ca {currentShift} ngày {day}.");
 
                                     professorID = alternateProfessorID; // Sử dụng giáo viên thay thế
-                                    // Thêm giáo viên thay thế vào danh sách phân công
+                                                                        // Thêm giáo viên thay thế vào danh sách phân công
+                                                                          
                                     professorAssignments[key].Add(professorID);
                                 }
                             }
                             else
                             {
-                                // Nếu giáo viên này chưa được phân công, thêm vào danh sách phân công
-                                professorAssignments[key].Add(professorID);
-
+                                // Nếu key không tồn tại, có nghĩa là giáo viên này chưa được phân công cho ca học này trong ngày này
+                                // Tiếp tục thêm TimetableEvent
+                                professorAssignments[key] = new HashSet<int>(); // Thêm mới nếu cần
                             }
+                            
                             
                             // Tiếp tục thêm TimetableEvent
                             TimetableEvent timetableEvent = new TimetableEvent
@@ -198,14 +185,12 @@ namespace AppLapLichThoiKhoaBieuPoly
                             };
 
                             // Tiếp tục logic để thêm timetableEvent vào chromosome
-                            Console.WriteLine("chromosome.Timetable[day, currentShift].AddEvent(timetableEvent);");
                             chromosome.Timetable[day, currentShift].AddEvent(timetableEvent);
                             
 
                         }
                     }
                 }
-                Console.WriteLine("_ListPopulation.Add(chromosome);");
                 _ListPopulation.Add(chromosome);
             }
         }
@@ -310,7 +295,6 @@ namespace AppLapLichThoiKhoaBieuPoly
                         Console.WriteLine(ex.Message);
                     }
                 }
-                Console.WriteLine("ID môn học: " + secondCourseID  + "Ngày thứ " + indexCourse);
                 return secondCourseID.HasValue ? secondCourseID.Value : 0; // Trả về giá trị nếu có, nếu không trả về 0
             }
             catch (Exception)
@@ -375,6 +359,7 @@ namespace AppLapLichThoiKhoaBieuPoly
             return classID;
         }
 
+
         // hàm in ra màn hình 
         public void PrintPopulationData()
         {
@@ -415,25 +400,24 @@ namespace AppLapLichThoiKhoaBieuPoly
         //Hàm đánh giá
         public void EvaluateFitness()
         {
-            Console.WriteLine("**************************___Chọn lọc theo đánh giá___*********************");
-            int dem = 0;
+            Console.WriteLine("************************** Đánh giá Fitness **************************");
             foreach (var chromosome in _ListPopulation)
             {
-                chromosome.Fitness = 0; // Khởi tạo giá trị Fitness ban đầu là 0 cho mỗi chromosome
-
+                int fitness = 0; // Khởi tạo điểm số hoàn hảo
                 for (int day = 0; day < chromosome.Timetable.GetLength(0); day++)
                 {
                     for (int shift = 0; shift < chromosome.Timetable.GetLength(1); shift++)
                     {
-                        // Kiểm tra xem mỗi giáo viên trong ca này có dạy quá một lớp không
-                        if (ALecturerInAShiftDoesNotExceedOneClass(chromosome.Timetable[day, shift]))
+                        TimetableSlot slot = chromosome.Timetable[day, shift];
+                        // Kiểm tra vi phạm cho slot này
+                        if (ALecturerInAShiftDoesNotExceedOneClass(slot, day, shift))
                         {
-                            chromosome.Fitness += 1; // Nếu không vi phạm, cộng điểm thưởng
+                            fitness ++; // Giảm 10 điểm cho mỗi vi phạm
                         }
                     }
                 }
-                dem++;
-                Console.WriteLine("chromosome " + dem + " Fitness: " + _Fitness);
+                chromosome.Fitness = fitness; // Cập nhật Fitness dựa trên số lượng ko vi phạm
+                Console.WriteLine($"Chromosome Fitness: {fitness}");
             }
         }
 
@@ -617,63 +601,27 @@ namespace AppLapLichThoiKhoaBieuPoly
         #region Các ràng buộc cứng
 
         // điều kiện 1: Một giảng viên trong một ca dạy không quá một lớp;
-        /*public bool ALecturerInAShiftDoesNotExceedOneClass()
-                {
-                    // Từ điển để theo dõi các giáo viên đã được phân công cho mỗi ca học
-                    Dictionary<int, HashSet<int>> shiftAssignments = new Dictionary<int, HashSet<int>>();
-
-                    foreach (var chromosome in _ListPopulation)
-                    {
-                        for (int day = 0; day < chromosome.Timetable.GetLength(0); day++)
-                        {
-                            for (int shift = 0; shift < chromosome.Timetable.GetLength(1); shift++)
-                            {
-                                // Khóa duy nhất cho từng ca học trong một ngày cụ thể
-                                int shiftKey = day * chromosome.Timetable.GetLength(1) + shift;
-
-                                // Nếu chưa có ca học này trong từ điển, thêm nó vào
-                                if (!shiftAssignments.ContainsKey(shiftKey))
-                                {
-                                    shiftAssignments[shiftKey] = new HashSet<int>();
-                                }
-
-                                foreach (var timetableEvent in chromosome.Timetable[day, shift].Events)
-                                {
-                                    // Nếu giáo viên này đã được phân công trong ca học này, trả về false
-                                    if (shiftAssignments[shiftKey].Contains(timetableEvent.ProfessorID))
-                                    {
-                                        return false;
-                                    }
-
-                                    // Nếu chưa, phân công giáo viên này vào ca học
-                                    shiftAssignments[shiftKey].Add(timetableEvent.ProfessorID);
-                                }
-                            }
-                        }
-                    }
-
-                    // Nếu không có giáo viên nào được phân công quá một lớp trong cùng một ca học, trả về true
-                    return true;
-                }*/
-        private bool ALecturerInAShiftDoesNotExceedOneClass(TimetableSlot slot)
+        private bool ALecturerInAShiftDoesNotExceedOneClass(TimetableSlot slot, int day, int shift)
         {
             HashSet<int> seenProfessors = new HashSet<int>(); // Tập hợp lưu trữ giáo viên đã xét trong ca học
-
-            foreach (var e in slot.Events)
+            foreach (var timetableEvent in slot.Events)
             {
-                // Kiểm tra xem giáo viên đã được phân công trong ca này chưa
-                if (seenProfessors.Contains(e.ProfessorID))
+                if (timetableEvent.ProfessorID != 0) // Giả sử giáo viên có ID khác 0 là hợp lệ
                 {
-                    return false; // Nếu giáo viên đã được phân công, trả về false (vi phạm)
-                }
-                else
-                {
-                    seenProfessors.Add(e.ProfessorID); // Nếu chưa, thêm giáo viên vào tập hợp đã xét
+                    if (!seenProfessors.Add(timetableEvent.ProfessorID))
+                    {
+                        // Nếu không thể thêm giáo viên vào HashSet, nghĩa là đã có giáo viên đó trong ca học này
+                        Console.WriteLine($"Vi phạm: Giáo viên {timetableEvent.ProfessorID} đã dạy lớp khác trong cùng ca {shift + 1} và ngày {day + 1}");
+                        Console.WriteLine($"Class ID: {timetableEvent.ClassID}, \tRoom ID: {timetableEvent.RoomID}, \tProfessor ID: {timetableEvent.ProfessorID}, \tCourse ID: {timetableEvent.CourseID}");
+                        return false; // Có vi phạm
+                    }
                 }
             }
-
-            return true; // Nếu không có vi phạm, trả về true
+            return true; // Không có vi phạm
         }
+
+
+
 
 
         // điều kiện 2: Một lớp trong một ca không quá một giảng viên;

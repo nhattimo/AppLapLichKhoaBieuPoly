@@ -37,7 +37,7 @@ namespace AppLapLichThoiKhoaBieuPoly.UC
             // đánh giá 
             ga.EvaluateFitness();
             // Chọn lọc
-            ga.SelFitnessSelective();
+            //ga.SelFitnessSelective();
 
 
             /*// Số thế hệ muốn lặp
