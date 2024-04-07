@@ -54,27 +54,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassTest.cs" />
-    <Compile Include="DbConnection.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Form\FormCreateATimetable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Form\FormCreateATimetable.Designer.cs">
+      <DependentUpon>FormCreateATimetable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\DbConnection.cs" />
+    <Compile Include="Form\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAdmin.cs">
+    <Compile Include="Form\FormAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAdmin.Designer.cs">
+    <Compile Include="Form\FormAdmin.Designer.cs">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="GeneticAlgorithm.cs" />
-    <Compile Include="Management.cs" />
+    <Compile Include="Script\GeneticAlgorithm.cs" />
+    <Compile Include="Management\Management.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimetableChromosome.cs" />
-    <Compile Include="TimetableEvent.cs" />
-    <Compile Include="TimetableSlot.cs" />
+    <Compile Include="Script\TimetableChromosome.cs" />
+    <Compile Include="Script\TimetableEvent.cs" />
+    <Compile Include="Script\TimetableSlot.cs" />
+    <Compile Include="UC\CreateATimetabl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\CreateATimetabl.Designer.cs">
+      <DependentUpon>CreateATimetabl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\DetailedSchedule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\DetailedSchedule.Designer.cs">
+      <DependentUpon>DetailedSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\OtherDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\OtherDetails.Designer.cs">
+      <DependentUpon>OtherDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC\UC_Classes.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -135,10 +158,13 @@
     <Compile Include="UC\UC_Schedule.Designer.cs">
       <DependentUpon>UC_Schedule.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Form\FormCreateATimetable.resx">
+      <DependentUpon>FormCreateATimetable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAdmin.resx">
+    <EmbeddedResource Include="Form\FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -151,6 +177,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UC\CreateATimetabl.resx">
+      <DependentUpon>CreateATimetabl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\DetailedSchedule.resx">
+      <DependentUpon>DetailedSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\OtherDetails.resx">
+      <DependentUpon>OtherDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC\UC_Classes.resx">
       <DependentUpon>UC_Classes.cs</DependentUpon>
     </EmbeddedResource>

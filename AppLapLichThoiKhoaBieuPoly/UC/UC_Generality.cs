@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Guna.UI2.WinForms;
+using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AppLapLichThoiKhoaBieuPoly.UC
@@ -16,240 +17,50 @@ namespace AppLapLichThoiKhoaBieuPoly.UC
             InitializeComponent();
         }
 
+        Guna2GradientButton[] btnArray;
+        UserControl[] controlArray;
+
         private void UC_Generality_Load(object sender, EventArgs e)
         {
-            btnload.PerformClick();
+            btnScheduleDetailed.PerformClick();
         }
 
-        private void btnload_Click(object sender, EventArgs e)
+
+        #region Các Function
+
+        void UCManagement(UserControl uC)
         {
-            LoadDataGridViewClasses();
-            LoadDataGridViewProfessor();
-            LoadDataGridViewDepartments();
-            LoadDataGridViewClassrooms();
-            LoadDataGridViewCourses();
-            LoadDataGridViewSchedule();
+            controlArray = new UserControl[] { otherDetails1, detailedSchedule1 , createATimetabl1 };
+            Management.UCArrayVisible(controlArray, uC);
+        }
+        void BtnTasbalClickManagement(Guna2GradientButton btn)
+        {
+            btnArray = new Guna2GradientButton[] { btnOtherDetailed, btnScheduleDetailed, btnCreateATimetable }; //  btn bán chạy, btn doanh thu, btn doanh số
+            Management.BtnTasbalClick(btnArray, Color.Transparent, btn, Color.DarkGray);
+            btn.BringToFront();
         }
 
-        void LoadDataGridViewClasses()
+
+
+
+        #endregion
+
+        private void btnScheduleDetailed_Click(object sender, EventArgs e)
         {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_KetNoi.ConnectionString))
-                {
-                    // Mở kết nối
-                    connection.Open();
-
-                    // Câu lệnh SQL để lấy dữ liệu từ bảng Classes
-                    string query = "SELECT a.ClassID, a.ClassName, b.DepartmentName FROM Classes a INNER JOIN Departments b on a.DepartmentID = b.DepartmentID";
-
-                    // Tạo đối tượng Command và gán câu lệnh và kết nối cho nó
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        // Tạo đối tượng Adapter để đọc dữ liệu
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                        {
-                            // Tạo DataTable để chứa dữ liệu
-                            DataTable dataTable = new DataTable();
-
-                            // Đổ dữ liệu từ Adapter vào DataTable
-                            adapter.Fill(dataTable);
-
-                            // Gán DataTable làm nguồn dữ liệu cho DataGridViewClasses
-                            DataGridViewClasses.DataSource = dataTable;
-                        }
-                    }
-
-                    // Đóng kết nối
-                    connection.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            UCManagement(detailedSchedule1);
+            BtnTasbalClickManagement(btnScheduleDetailed);
         }
 
-        void LoadDataGridViewProfessor()
+        private void btnOtherDetailed_Click(object sender, EventArgs e)
         {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_KetNoi.ConnectionString))
-                {
-                    connection.Open();
-
-                    // Câu lệnh SQL để lấy dữ liệu từ bảng Courses và Departments
-                    //string query = @"SELECT * FROM Professors a INNER JOIN ProfessorCourses b on a.ProfessorID = B.ProfessorID;";
-                    string query = @"SELECT * FROM Professors;";
-
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    DataTable dataTable = new DataTable();
-                    adapter.Fill(dataTable);
-
-
-                    // Hiển thị dữ liệu lên Guna2DataGridView
-                    DataGridViewProfessor.DataSource = dataTable;
-
-                    // Đóng kết nối
-                    connection.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            UCManagement(otherDetails1);
+            BtnTasbalClickManagement(btnOtherDetailed);
         }
 
-        void LoadDataGridViewDepartments()
+        private void btnCreateATimetable_Click(object sender, EventArgs e)
         {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_KetNoi.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = "SELECT DepartmentID, DepartmentName FROM Departments";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                        {
-                            DataTable dataTable = new DataTable();
-                            adapter.Fill(dataTable);
-                            DataGridViewDepartments.DataSource = dataTable;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi: " + ex.Message);
-            }
-        }
-
-        void LoadDataGridViewClassrooms()
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_KetNoi.ConnectionString))
-                {
-                    // Mở kết nối
-                    connection.Open();
-
-                    // Câu lệnh SQL để lấy dữ liệu từ bảng Classes
-                    string query = "SELECT * FROM Classrooms";
-
-                    // Tạo đối tượng Command và gán câu lệnh và kết nối cho nó
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        // Tạo đối tượng Adapter để đọc dữ liệu
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                        {
-                            // Tạo DataTable để chứa dữ liệu
-                            DataTable dataTable = new DataTable();
-
-                            // Đổ dữ liệu từ Adapter vào DataTable
-                            adapter.Fill(dataTable);
-
-                            // Gán DataTable làm nguồn dữ liệu cho DataGridViewClasses
-                            DataGridViewClassrooms.DataSource = dataTable;
-                        }
-                    }
-
-                    // Đóng kết nối
-                    connection.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        void LoadDataGridViewCourses()
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_KetNoi.ConnectionString))
-                {
-                    // Mở kết nối
-                    connection.Open();
-
-                    // Câu lệnh SQL để lấy dữ liệu từ bảng Classes
-                    string query = "SELECT a.CourseID, a.CourseName, b.DepartmentName FROM Courses a INNER JOIN Departments b on a.DepartmentID = b.DepartmentID";
-
-                    // Tạo đối tượng Command và gán câu lệnh và kết nối cho nó
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        // Tạo đối tượng Adapter để đọc dữ liệu
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                        {
-                            // Tạo DataTable để chứa dữ liệu
-                            DataTable dataTable = new DataTable();
-
-                            // Đổ dữ liệu từ Adapter vào DataTable
-                            adapter.Fill(dataTable);
-
-                            // Gán DataTable làm nguồn dữ liệu cho DataGridViewClasses
-                            DataGridViewCourses.DataSource = dataTable;
-                        }
-                    }
-
-                    // Đóng kết nối
-                    connection.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        void LoadDataGridViewSchedule()
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_KetNoi.ConnectionString))
-                {
-                    // Mở kết nối
-                    connection.Open();
-
-                    // Câu lệnh SQL để lấy dữ liệu từ bảng Classes
-                    string query = "SELECT c.ClassName, cr.CourseName, pf.ProfessorName, clr.RoomName, wd.NameWeekday, st.NameStudy " +
-                        "FROM ClassSchedules cs " +
-                        "inner join Classes c on c.ClassID = cs.ClassID " +
-                        "inner join Courses cr on cr.CourseID = cs.CourseID " +
-                        "inner join Professors pf on pf.ProfessorID = cs.ProfessorID " +
-                        "inner join Classrooms clr on clr.RoomID = cs.RoomID " +
-                        "inner join Weekdays wd on wd.WeekdayID = cs.WeekdayID " +
-                        "inner join Studys st on st.StudyID = cs.StudyID order by wd.WeekdayID";
-
-                    // Tạo đối tượng Command và gán câu lệnh và kết nối cho nó
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        // Tạo đối tượng Adapter để đọc dữ liệu
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                        {
-                            // Tạo DataTable để chứa dữ liệu
-                            DataTable dataTable = new DataTable();
-
-                            // Đổ dữ liệu từ Adapter vào DataTable
-                            adapter.Fill(dataTable);
-
-                            // Gán DataTable làm nguồn dữ liệu cho DataGridViewClasses
-                            DataGridViewSchedule.DataSource = dataTable;
-                        }
-                    }
-
-                    // Đóng kết nối
-                    connection.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            UCManagement(createATimetabl1);
+            BtnTasbalClickManagement(btnCreateATimetable);
         }
     }
 }

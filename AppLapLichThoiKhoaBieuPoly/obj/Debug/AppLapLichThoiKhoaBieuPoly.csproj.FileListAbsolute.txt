@@ -48,3 +48,7 @@ E:\CODE\CODE_C#\CODE APP\AppLapLichThoiKhoaBieuPoly\AppLapLichThoiKhoaBieuPoly\o
 E:\CODE\CODE_C#\CODE APP\AppLapLichThoiKhoaBieuPoly\AppLapLichThoiKhoaBieuPoly\obj\Debug\AppLapLichThoiKhoaBieuPoly.UC.UC_Department.resources
 E:\CODE\CODE_C#\CODE APP\AppLapLichThoiKhoaBieuPoly\AppLapLichThoiKhoaBieuPoly\obj\Debug\AppLapLichThoiKhoaBieuPoly.UC.UC_Generality.resources
 E:\CODE\CODE_C#\CODE APP\AppLapLichThoiKhoaBieuPoly\AppLapLichThoiKhoaBieuPoly\obj\Debug\AppLapLichThoiKhoaBieuPoly.UC.UC_Schedule.resources
+E:\CODE\CODE_C#\CODE APP\AppLapLichThoiKhoaBieuPoly\AppLapLichThoiKhoaBieuPoly\obj\Debug\AppLapLichThoiKhoaBieuPoly.UC.DetailedSchedule.resources
+E:\CODE\CODE_C#\CODE APP\AppLapLichThoiKhoaBieuPoly\AppLapLichThoiKhoaBieuPoly\obj\Debug\AppLapLichThoiKhoaBieuPoly.UC.OtherDetails.resources
+E:\CODE\CODE_C#\CODE APP\AppLapLichThoiKhoaBieuPoly\AppLapLichThoiKhoaBieuPoly\obj\Debug\AppLapLichThoiKhoaBieuPoly.UC.CreateATimetabl.resources
+E:\CODE\CODE_C#\CODE APP\AppLapLichThoiKhoaBieuPoly\AppLapLichThoiKhoaBieuPoly\obj\Debug\AppLapLichThoiKhoaBieuPoly.FormCreateATimetable.resources

@@ -179,7 +179,6 @@
             this.txtNameClass.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtNameClass.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtNameClass.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtNameClass.FillColor = System.Drawing.Color.BlanchedAlmond;
             this.txtNameClass.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtNameClass.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtNameClass.ForeColor = System.Drawing.Color.Black;
@@ -214,6 +213,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.PapayaWhip;
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAddProfessors);
             this.Controls.Add(this.DataGridViewClasses);
